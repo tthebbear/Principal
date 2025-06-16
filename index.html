@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Favicon básico -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    
+    <!-- Favicon para dispositivos Apple -->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    
+    <!-- Favicon moderno (PNG) -->
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+    
+    <!-- Manifest para aplicaciones web -->
+    <link rel="manifest" href="site.webmanifest">
+
+    <!-- Botón flotante de WhatsApp -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> 
+    
+    <title>BearWeb - Soluciones Digitales</title>
+    <style>
+        /* Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            display: flex;
+            align-items: center;    /* Centra verticalmente */
+            gap: 5px;              /* Espacio entre imagen y texto */
+        }
+        
+        .frase {
+            flex: 1; 
+        }
+
+        .imagen{
+            width: auto; 
+            height: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column; /* Apila imagen y texto en móviles */
+            }
+            .imagen {
+                width: 100%; /* Imagen ocupa todo el ancho */
+            }
+        }
+        
+        /* Estilos del encabezado */
+        header {
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            text-align: center;
+            padding: 0;
+            position: sticky; /* Cambiado de sticky a fixed */
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+        }
+        
+        .logo span {
+            color: #e74c3c;
+        }
+        
+        /* Estilos de las pestañas */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin: none;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .tab-button {
+            padding: 12px 25px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #7f8c8d;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .tab-button:hover {
+            color: #2c3e50;
+        }
+        
+        .tab-button.active {
+            color: #e74c3c;
+        }
+        
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #e74c3c;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 20px;
+            animation: fadeIn 0.5s ease;
+            padding-left: 100px;   /* Espacio izquierdo */
+            padding-right: 100px;  /* Espacio derecho */
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Estilos de la presentación */
+        .presentation {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .presentation h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0px;
+            color: #2c3e50;
+        }
+        
+        .presentation p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 10px;
+            color: #7f8c8d;
+        }
+        
+        .presentation img {
+            max-width: 10%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Estilos de las tarjetas */
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-preview {
+            height: 200px;
+            background-color: #3498db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .card-content {
+            padding: 20px;
+        }
+        
+        .card-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .card-description {
+            color: #7f8c8d;
+            margin-bottom: 15px;
+        }
+        
+        .card-tag {
+            display: inline-block;
+            background-color: #e74c3c;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        /* Estilos generales del footer */
+        .site-footer {
+          background-color: #f8f9fa;
+          padding: 40px 0;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          color: #333;
+        }
+
+        .footer-container {
+          max-width: 1100px;
+          margin: 0 auto;
+          padding: 0 20px;
+        }
+
+        /* Encabezado del footer */
+        .footer-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 30px;
+        }
+
+        /* Estilos para la marca (logo + nombre) */
+        .brand {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .logo {
+          height: 40px;
+          width: auto;
+        }
+
+        .brand-name {
+          font-size: 24px;
+          font-weight: 700;
+          color: #2c3e50;
+        }
+
+        .highlight {
+          color: #e74c3c;
+        }
+
+        /* Estilos para redes sociales */
+        .social-media {
+          display: flex;
+          gap: 15px;
+        }
+
+        .social-icon {
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          font-size: 16px;
+          text-decoration: none;
+          transition: transform 0.3s ease;
+        }
+
+        .social-icon:hover {
+          transform: translateY(-3px);
+        }
+
+        .social-icon.facebook { background-color: #3b5998; }
+        .social-icon.instagram { background-color: #e4405f; }
+        .social-icon.twitter { background-color: #1da1f2; }
+        .social-icon.github { background-color: #333; }
+        .social-icon.whatsapp { background-color: #25d366; }
+
+        /* Enlaces legales */
+        .legal-links {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+          margin-bottom: 20px;
+        }
+
+        .legal-links a {
+          color: #495057;
+          text-decoration: none;
+          font-size: 14px;
+          transition: color 0.3s ease;
+        }
+
+        .legal-links a:hover {
+          color: #e74c3c;
+        }
+
+        .separator {
+          color: #dee2e6;
+        }
+
+        /* Copyright */
+        .copyright {
+          text-align: center;
+          color: #adb5bd;
+          font-size: 13px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+          .footer-header {
+            flex-direction: column;
+            gap: 20px;
+          }
+  
+          .brand {
+            margin-bottom: 15px;
+          }
+  
+          .legal-links {
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+          }
+  
+          .separator {
+            display: none;
+          }
+        }
+
+        /* Estilos para el botón flotante de WhatsApp */
+        .float-whatsapp {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 37px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+            text-decoration: none;
+        }
+
+        .float-whatsapp:hover {
+            background-color: #25d366; /* Para cambio de color es el código: #128c7e */
+            transform: scale(1.1);
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .float-whatsapp .tooltip {
+            visibility: hidden;
+            width: 140px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -70px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 14px;
+        }
+
+        .float-whatsapp .tooltip::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
+
+        .float-whatsapp:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Animación de pulso */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+
+        /* Versión responsive */
+        @media (max-width: 768px) {
+            .float-whatsapp {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 35px;
+                font-size: 25px;
+            }
+        }
+
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <!-- Botón flotante de WhatsApp -->
+    <a href="https://wa.me/593978804190" class="float-whatsapp" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-whatsapp"></i>
+        <span class="tooltip">Necesitas ayuda?</span>
+    </a>
+
+    <header>
+        <div class="container">
+            <img src="bearlogo.png" alt="BearWeb Logo" class="imagen">
+            <div class="frase">
+                <p style="font-size: 2rem; font-weight: bold;">Bear<span style="color: #e74c3c;">Web</span></p>
+                <p style="margin-top: -10px; font-size: 0.5rem">Soluciones digitales a tu medida </p>
+            </div>
+        </div>
+
+    <div class="container">
+        <div class="tabs">
+            <button class="tab-button active" data-tab="presentation">Inicio</button>
+            <button class="tab-button" data-tab="cvs">CV's Cards</button>
+            <button class="tab-button" data-tab="design">Web Design</button>
+        </div>
+    </header>   
+     
+        <div class="tab-content active" id="presentation">
+            <div class="presentation">
+                <h1>Bienvenido a BearWeb</h1>
+                <p>BearWeb es tu solución integral para diseño web profesional y creación de CVs digitales impactantes. Nuestro equipo de expertos combina creatividad y tecnología para ofrecerte productos de alta calidad que destacan en el mundo digital.</p>
+                <img src="bearlogo.png" alt="BearWeb Presentación">
+                <p>Explora nuestras pestañas para descubrir nuestros servicios de creación de CVs digitales y diseños web personalizados. Cada producto está diseñado pensando en tus necesidades específicas.</p>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="cvs">
+            <h2>CV's Cards - Plantillas Profesionales</h2>
+            <p>Selecciona entre nuestras plantillas de CV profesionales para destacar en tu búsqueda laboral.</p>
+            
+            <div class="cards-container">
+                <!-- Tarjeta 1 -->
+                <div class="card">
+                    <div class="card-preview" style="background-color: #3498db;">
+                        <img src="first.jpg" alt="CV Clásico" style="width: 100%; height: 100%; object-fit: cover; object-fit: contain; object-fit: fill;" onerror="this.style.display='none'">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Initial</h3>
+                        <p class="card-description">Diseño limpio y profesional perfecto para cualquier industria. Resalta tu experiencia de manera clara y ordenada.</p>
+                        <span class="card-tag">Template</span>
+                    </div>
+                </div>
+                
+                <!-- Tarjeta 2 -->
+                <div class="card">
+                    <div class="card-preview" style="background-color: #e74c3c;">
+                        <img src="first.jpg" alt="CV Clásico" style="width: 100%; height: 100%; object-fit: cover; object-fit: contain; object-fit: fill;" onerror="this.style.display='none'">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Fresh</h3>
+                        <p class="card-description">Perfecto para diseñadores y profesionales creativos. Muestra tu personalidad mientras mantienes profesionalismo.</p>
+                        <span class="card-tag">Template</span>
+                    </div>
+                </div>
+                
+                <!-- Tarjeta 3 -->
+                <div class="card">
+                    <div class="card-preview" style="background-color: #2ecc71;">
+                        <img src="first.jpg" alt="CV Clásico" style="width: 100%; height: 100%; object-fit: cover; object-fit: contain; object-fit: fill;" onerror="this.style.display='none'">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Minimalist</h3>
+                        <p class="card-description">Menos es más. Este diseño elegante pone el foco en tu contenido sin distracciones innecesarias.</p>
+                        <span class="card-tag">Template</span>
+                    </div>
+                </div>
+                
+                <!-- Espacio para nuevas tarjetas que se agregarán en el futuro -->
+                <div class="card add-new-card">
+                    <div class="card-preview" style="background-color: #9b59b6; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                        <i class="fas fa-plus" style="font-size: 3rem; margin-bottom: 10px;"></i>
+                        <div>Coming Soon</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Your idea</h3>
+                        <p class="card-description">Si posees una idea y deseas plasmarla para satisfacer todas tus necesidades profesionales, contáctanos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="design">
+            <h2>Web Design - Nuestros Trabajos</h2>
+            <p>Explora nuestros diseños web personalizados creados para diversos negocios y necesidades.</p>
+            
+            <div class="cards-container">
+                <!-- Tarjeta 1 -->
+                <div class="card">
+                    <div class="card-preview" style="background-color: #f39c12;">
+                        <img src="first.jpg" alt="CV Clásico" style="width: 100%; height: 100%; object-fit: cover; object-fit: contain; object-fit: fill;" onerror="this.style.display='none'">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Professional Portfolio</h3>
+                        <p class="card-description">Diseño perfecto para freelancers y profesionales que necesitan mostrar su trabajo de manera impactante.</p>
+
+                        <span class="card-tag">Template</span>
+                    </div>
+                </div>
+                
+                <!-- Tarjeta 2 -->
+                <div class="card">
+                    <div class="card-preview" style="background-color: #1abc9c;">
+                        <img src="first.jpg" alt="CV Clásico" style="width: 100%; height: 100%; object-fit: cover; object-fit: contain; object-fit: fill;" onerror="this.style.display='none'">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Online Store</h3>
+                        <p class="card-description">Solución completa para e-commerce con integración de carrito de compras y pasarela de pagos.</p>
+                        <span class="card-tag">Template</span>
+                    </div>
+                </div>
+                
+                <!-- Tarjeta 3 -->
+                <div class="card">
+                    <div class="card-preview" style="background-color: #34495e;">
+                        <img src="first.jpg" alt="CV Clásico" style="width: 100%; height: 100%; object-fit: cover; object-fit: contain; object-fit: fill;" onerror="this.style.display='none'">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Landing Page</h3>
+                        <p class="card-description">Diseño optimizado para conversiones, perfecto para campañas de marketing y lanzamientos de productos.</p>
+                        <span class="card-tag">Template</span>
+                    </div>
+                </div>
+                
+                <!-- Espacio para nuevas tarjetas que se agregarán en el futuro -->
+                <div class="card add-new-card">
+                    <div class="card-preview" style="background-color: #e67e22; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                        <i class="fas fa-plus" style="font-size: 3rem; margin-bottom: 10px;"></i>
+                        <div>Coming Soon</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Your Idea</h3>
+                        <p class="card-description">Si deseas plasmar tu idea para satisfacer las necesidades digitales, contactanos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="site-footer">
+      <div class="footer-container">
+        <!-- Encabezado del footer con logo y redes -->
+        <div class="footer-header">
+          <!-- Logo a la izquierda -->
+          <div class="brand">
+            <img src="bearlogo.png" alt="BearWeb Logo" class="logo">
+            <span class="brand-name">Bear<span class="highlight">Web</span></span>
+          </div>
+      
+          <!-- Redes sociales a la derecha -->
+          <div class="social-media">
+            <a href="#" class="social-icon facebook" aria-label="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://www.instagram.com/tthebbear/" class="social-icon instagram" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-icon twitter" aria-label="Twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="social-icon github" aria-label="GitHub">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://api.whatsapp.com/send/?phone=593978804190&text&type=phone_number&app_absent=0" class="social-icon whatsapp" aria-label="WhatsApp">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+    
+        <!-- Enlaces legales -->
+        <div class="legal-links">
+          <a href="#">Términos y condiciones</a>
+          <span class="separator">|</span>
+          <a href="#">Política de privacidad</a>
+        </div>
+        
+        <!-- Copyright -->
+        <div class="copyright">
+          © 2025 BearWeb | Todos los derechos reservados
+        </div>
+      </div>
+    </footer>
+
+    <script>
+        // Funcionalidad de las pestañas
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remover clase active de todos los botones y contenidos
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Agregar clase active al botón clickeado
+                    button.classList.add('active');
+                    
+                    // Mostrar el contenido correspondiente
+                    const tabId = button.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Efecto hover más suave para las tarjetas
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
